@@ -1,21 +1,12 @@
-#!/usr/bin/env python3
+from config import app, api, db
+from server.models.workout import WorkOuts
+from routes.auth.login import Login
+from routes.auth.logout import Logout
+from routes.auth.signup import Signup
+from routes.auth.currentuser import CurrentUser
 
-# Standard library imports
+ # General Route Concerns
 
-# Remote library imports
-from flask import request
-from flask_restful import Resource
-
-# Local imports
-from config import app, db, api
-# Add your model imports
-
-
-# Views go here!
-
-@app.route('/')
-def index():
-    return '<h1>Project Server</h1>'
 
 
 if __name__ == '__main__':
