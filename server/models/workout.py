@@ -1,7 +1,4 @@
-from flask import Flask, request, jsonify, make_response
-from sqlalchemy_serializer import SerializerMixin, Resource
-from sqlalchemy.ext.associationproxy import association_proxy
-from config import db
+from models.__init__ import SerializerMixin, validates, re, db
 
 class WorkOut(db.Model, SerializerMixin):
     __tablename__ = "work_outs"
