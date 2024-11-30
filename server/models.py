@@ -10,7 +10,7 @@ class Category(db.Model, SerializerMixin):
     name = db.Column(db.String(80), nullable=False)
 
     @validates("name")
-    def validate_name(self, _, value):
+    def validate_name(self, value):
         if not value:
             raise ValueError("name must be present")
         if len(value) < 3:
