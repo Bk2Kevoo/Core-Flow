@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
-
-# Standard library imports
-from random import randint, choice as rc
-
-# Remote library imports
 from faker import Faker
+from config import app
+from models.__init__ import db
+from models.workout import WorkOut
+from models.category import Category
+from models.workexercise import WorkExercise
 
-# Local imports
-from app import app
-from server.models.category import db
+fake = Faker()
 
-if __name__ == '__main__':
-    fake = Faker()
-    with app.app_context():
-        print("Starting seed...")
-        # Seed code goes here!
+with app.app_context():
+    WorkOut.query.delete()
+    Category.query.delete()
+    WorkExercise.query.delete()
+
+    
