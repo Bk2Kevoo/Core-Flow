@@ -1,3 +1,1 @@
-from sqlalchemy_serializer import SerializerMixin, validates
-from sqlalchemy.ext.associationproxy import association_proxy
-from config import db
+from routes.__init__ import Resource, g, request, db

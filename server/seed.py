@@ -1,78 +1,72 @@
-# Standard library imports
-from random import randint, choice as rc
-
-# Remote library imports
+#!/usr/bin/env python3
 from faker import Faker
-
-# Local imports
 from config import app
 from models.__init__ import db
+from models.workout import WorkOut
 from models.category import Category
-from models.exercise import Exercise
 from models.workexercise import WorkExercise
-from models.workout import Workout
+from models.exercise import Exercise
 
 fake = Faker()
+
 with app.app_context():
-    print("Starting seed...")
-    # Seed code goes here!
+    # Clear existing data
+    WorkOut.query.delete()
     Category.query.delete()
-    Exercise.query.delete()
     WorkExercise.query.delete()
-    Workout.query.delete()
+    Exercise.query.delete()
+    db.session.commit()
 
-    #Workouts
-    workout1 = Workout(name="Leg Day")
-    workout2 = Workout(name="Push Day")
-    workout3 = Workout(name="Pull Day")
-    workouts = [workout1, workout2, workout3]
+    # Categories
+    cat1 = Category(name="Barbell Workout")
+    cat2 = Category(name="Calisthenics")
+    cats = [cat1, cat2]
 
-    #WorkExercises
+    db.session.add_all(cats)
+    db.session.commit()
+
+    # Exercises (linked to categories via category_id)
+    ex1 = Exercise(name="Squats", body_part="Legs", category_id=cat1.id)
+    ex2 = Exercise(name="Pullups", body_part="Back & Biceps", category_id=cat2.id)
+    ex3 = Exercise(name="Pushups", body_part="Chest & Triceps", category_id=cat2.id)
+    exercises = [ex1, ex2, ex3]
+
+    db.session.add_all(exercises)
+    db.session.commit()
+
+    # Workouts
+    workout1 = WorkOut(name="Strength Training", duration=60, date=fake.date_time_this_month())
+    workout2 = WorkOut(name="Bodyweight Circuit", duration=45, date=fake.date_time_this_month())
+    workouts = [workout1, workout2]
+
+    db.session.add_all(workouts)
+    db.session.commit()
+
+    # Work Exercises (Associating Workouts with Exercises)
     work_ex1 = WorkExercise(
-        sets="5"
-        reps="10-15"
-        weight="225 lbs."
+        sets=5,
+        reps="10-15",
+        weight="225 lbs.",
+        workout_id=workout1.id,
+        exercise_id=ex1.id  
     )
     work_ex2 = WorkExercise(
-        sets="4"
-        reps="10-15"
-        weight="Bodyweight"
+        sets=4,
+        reps="10-15",
+        weight="Bodyweight",
+        workout_id=workout2.id,
+        exercise_id=ex2.id  
     )
     work_ex3 = WorkExercise(
-        sets="4"
-        reps="30-50"
-        weight="Bodyweight"
+        sets=4,
+        reps="30-50",
+        weight="Bodyweight",
+        workout_id=workout2.id,
+        exercise_id=ex3.id  
     )
     work_exs = [work_ex1, work_ex2, work_ex3]
 
-    #Exercises
-    ex1 = (
-        name="Squats"
-        body_part="Legs"
-    )
-    ex2 = (
-        name="Pullups"
-        body_part="Back & Biceps"
-    )
-    ex3 = (
-            name="Pushups"
-            body_part="Chest & Triceps"
-        )
-    exs = [ex1, ex2, ex3]
-
-
-    #Categories
-    cat1 = Category(name="Barbell Workout")
-    cat2 = Category(name="Calisthenics")
-    cat3 = Category(name="Calisthenics")
-    cats = [cat1, cat2, cat3]
-
-
-    #Commit all instances to db
-    db.session.add_all(workouts)
     db.session.add_all(work_exs)
-    db.session.add_all(exs)
-    db.session.add_all(cats)
     db.session.commit()
 
     print("Seeding done!")
