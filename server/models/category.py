@@ -6,11 +6,15 @@ class Category(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), nullable=False)
 
+    # Relationship
+    exercises = db.relationship('Exercise', back_populates='category')
+
+
     def __repr__(self):
         return f'<Category {self.id}: {self.name}>'
 
     @validates("name")
-    def validate_name(self, value):
+    def validate_name(self, _, value):
         if not value:
             raise ValueError("name must be present")
         if len(value) < 3:

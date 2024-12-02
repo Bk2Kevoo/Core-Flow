@@ -7,7 +7,7 @@ from flask_bcrypt import Bcrypt
 from os import environ
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///theater.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///coreflow.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SESSION_TYPE"] = "sqlalchemy"
