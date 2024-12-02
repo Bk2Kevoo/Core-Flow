@@ -6,7 +6,6 @@ import { RouterProvider } from "react-router-dom";
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
-console.log("🚀 ~ router:", router)
 root.render(
   // <StrictMode>
   <RouterProvider router={router} />

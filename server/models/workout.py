@@ -1,4 +1,4 @@
-from models.__init__ import SerializerMixin, validates, re, db
+from models.__init__ import SerializerMixin,db
 
 class WorkOut(db.Model, SerializerMixin):
     __tablename__ = "work_outs"
@@ -16,6 +16,9 @@ class WorkOut(db.Model, SerializerMixin):
     # Relationship
     user = db.relationship("User", back_populates="work_outs")
 
+    # Serialize 
+    serialize_rules = ("-user",)
+
     def __repr__(self):
         return f"""
             Workout #{self.id}:
@@ -23,7 +26,4 @@ class WorkOut(db.Model, SerializerMixin):
                 Date: {self.date}
         """
 
-
-
-# api.add_resource(WorkOuts, "/workouts")
 
