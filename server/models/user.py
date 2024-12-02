@@ -9,7 +9,9 @@ class User(db.Model, SerializerMixin):
     name = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String, nullable=False, unique=True)
     _password_hash = db.Column("password_hash", db.String(20), nullable=False)
-    # workouts = db.relationship("WorkOut", back_populates="user", cascade="all, delete-orphan")
+
+
+    work_outs = db.relationship("WorkOut", back_populates="user", cascade="all, delete-orphan")
     # work_exercises = db.relationship("WorkExercise", back_populates="user", cascade="all, delete-orphan")
     # categories = db.relationship("Category", back_populates="user", cascade="all, delete-orphan")
 
@@ -19,7 +21,7 @@ class User(db.Model, SerializerMixin):
         return f'<User {self.id}: {self.name}: {self.email}>'
     
     @validates("name")
-    def validate_name(self, value):
+    def validate_name(self, _, value):
         if len(value) < 3:
             raise ValueError("name must be 3 characters long")
         return value
@@ -38,7 +40,7 @@ class User(db.Model, SerializerMixin):
         raise AttributeError("passwords are private.")
 
     @password.setter
-    def password(self, password_to_validate, str):
+    def password(self, password_to_validate):
         if not isinstance(password_to_validate, str):
             raise TypeError("password must be a string")
         if not 10 < len(password_to_validate) < 20:

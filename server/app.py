@@ -2,7 +2,11 @@ from flask import request, g, render_template, session
 from werkzeug.exceptions import NotFound
 
 from config import app, api, db
-from server.models.workout import WorkOuts
+from models.workout import WorkOut
+from models.user import User
+from models.work_exercise import WorkExercise
+from models.category import Category
+from models.exercise import Exercise
 from routes.auth.login import Login
 from routes.auth.logout import Logout
 from routes.auth.signup import Signup

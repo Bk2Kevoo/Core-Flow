@@ -4,17 +4,19 @@ from config import app
 from models.__init__ import db
 from models.workout import WorkOut
 from models.category import Category
-from models.workexercise import WorkExercise
+from models.work_exercise import WorkExercise
 from models.exercise import Exercise
+from models.user import User
 
 fake = Faker()
 
 with app.app_context():
     # Clear existing data
-    WorkOut.query.delete()
-    Category.query.delete()
     WorkExercise.query.delete()
+    WorkOut.query.delete()
+    User.query.delete()
     Exercise.query.delete()
+    Category.query.delete()
     db.session.commit()
 
     # Categories
@@ -34,9 +36,16 @@ with app.app_context():
     db.session.add_all(exercises)
     db.session.commit()
 
+    # User 
+    user1 = User(name="Kevin", email="kevin@email.com")
+    user1.password = ("password10!!")
+    
+    db.session.add(user1)
+    db.session.commit()
+
     # Workouts
-    workout1 = WorkOut(name="Strength Training", duration=60, date=fake.date_time_this_month())
-    workout2 = WorkOut(name="Bodyweight Circuit", duration=45, date=fake.date_time_this_month())
+    workout1 = WorkOut(name="Strength Training", date=fake.date_time_this_month(), user_id=user1.id)
+    workout2 = WorkOut(name="Bodyweight Circuit", date=fake.date_time_this_month(), user_id=user1.id)
     workouts = [workout1, workout2]
 
     db.session.add_all(workouts)
@@ -46,21 +55,21 @@ with app.app_context():
     work_ex1 = WorkExercise(
         sets=5,
         reps="10-15",
-        weight="225 lbs.",
+        weight=225,
         workout_id=workout1.id,
         exercise_id=ex1.id  
     )
     work_ex2 = WorkExercise(
         sets=4,
         reps="10-15",
-        weight="Bodyweight",
+        weight=0,
         workout_id=workout2.id,
         exercise_id=ex2.id  
     )
     work_ex3 = WorkExercise(
         sets=4,
         reps="30-50",
-        weight="Bodyweight",
+        weight=0,
         workout_id=workout2.id,
         exercise_id=ex3.id  
     )

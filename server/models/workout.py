@@ -1,10 +1,10 @@
 from models.__init__ import SerializerMixin,db
 
 class WorkOut(db.Model, SerializerMixin):
-    __tablename__ = "work_outs"
+    __tablename__ = "workouts"
 
     __table__args__ = (
-        db.CheckConstraint()
+        db.CheckConstraint("LENGTH(name) > 1")
     )
 
     id = db.Column(db.Integer, primary_key=True)
