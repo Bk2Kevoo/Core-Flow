@@ -8,7 +8,7 @@ from routes.auth.logout import Logout
 from routes.auth.signup import Signup
 from routes.auth.currentuser import CurrentUser
 
- # General Route Concerns
+# General Route Concerns
 @app.errorhandler(NotFound)
 def not_found(error):
     return{"error": error.description}, 404
