@@ -1,1 +1,0 @@
-from routes.__init__ import Resource, g, request, db

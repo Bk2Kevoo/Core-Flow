@@ -12,4 +12,9 @@ class WorkExercise(db.Model, SerializerMixin):
     workout_id = db.Column(db.Integer, db.ForeignKey("workouts.id", name="fk_work_exercises_to_workouts"))
     exercise_id = db.Column(db.Integer, db.ForeignKey("exercises.id", name="fk_work_exercises_to_exercises"))
 
+    def __repr__(self):
+        return 
 
+
+@validates("workout_id")
+def validate_workout_id
