@@ -5,7 +5,7 @@ function Home({productions}){
     return(
     <div>
         <Image /> 
-        <ProductionContainer productions={productions} />
+        {}
     </div>
     )
 }
