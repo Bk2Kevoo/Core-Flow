@@ -11,7 +11,7 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column("password_hash", db.String(20), nullable=False)
 
 
-    work_outs = db.relationship("WorkOut", back_populates="user", cascade="all, delete-orphan")
+    work_outs = db.relationship("WorkOut", back_populates="user",)
     # work_exercises = db.relationship("WorkExercise", back_populates="user", cascade="all, delete-orphan")
     # categories = db.relationship("Category", back_populates="user", cascade="all, delete-orphan")
 
