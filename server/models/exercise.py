@@ -15,7 +15,7 @@ class Exercise(db.Model, SerializerMixin):
     work_exercises = db.relationship("WorkExercise", back_populates="exercise")
 
     # Serialization rules
-    serialize_rules = ("-category", "-work_exercises.exercise") 
+    serialize_rules = ("-category", "-work_exercises") 
 
     def __repr__(self):
         return f"""
