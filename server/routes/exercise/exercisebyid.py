@@ -1,8 +1,11 @@
-from routes.__init__ import Resource, g, request, db
+from routes.__init__ import Resource, g, db
+from models.exercise import Exercise
 
 class ExerciseById(Resource):
     def get(self, id):
-        if g.exercise:
-            return g.exercise.to_dict(rules=("workexercise",)), 200
-        return {"Message": f"Could not find Exercise with id #{id}"}, 404
-    
+        try:
+            exercise = Exercise.query.filter_by(id=id).first()
+            if exercise:
+                return exercise.to_dict(), 200
+        except Exception as e:
+            return str(e), 400

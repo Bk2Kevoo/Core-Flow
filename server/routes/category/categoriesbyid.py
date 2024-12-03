@@ -2,7 +2,6 @@ from routes.__init__ import Resource, request, db, g
 from models.category import Category
 
 class CategoryByID(Resource):
-    
     def get(self, id):
         try:
             category = Category.query.filter_by(id=id).first()

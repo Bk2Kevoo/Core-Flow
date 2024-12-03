@@ -10,11 +10,9 @@ class Login(Resource):
         try:
             # Parse the JSON data
             data = request.get_json()
-
             # Ensure data is valid
             if not data:
                 return make_response({"error": "Invalid JSON data"}, 400)
-
             # Find a User by the email AND password if it matches
             user = User.query.filter_by(email=data.get("email", "")).first()
             if user and user.auth(data.get("password", "")):
