@@ -1,5 +1,4 @@
 from models.__init__ import SerializerMixin, validates, db
-from models.workout import WorkOut
 from models.category import Category
 
 class Exercise(db.Model, SerializerMixin):
@@ -8,15 +7,32 @@ class Exercise(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     body_part = db.Column(db.String)
-    workout_id = db.Column(db.Integer, db.ForeignKey("workouts.id"))
+    # workout_id = db.Column(db.Integer, db.ForeignKey("workouts.id"))
     category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
 
     # add relationship
-    # workout = db.relationship('Workout', back_populates='exercises')
     category = db.relationship('Category', back_populates='exercises')
+    work_exercises = db.relationship("WorkExercise", back_populates="exercise")
 
-    # add serialization rules
-    serialize_rules = ('-workout.exercises', '-category.exercises')
+    # Serialization rules
+    serialize_rules = ("-category", "-work_exercises.exercise") 
 
     def __repr__(self):
-        return f"<Exercise #{self.id}: {self.name}, {self.body_part}>"
+        return f"""
+        <Exercise #{self.id}: 
+            Name: {self.name}
+            BodyPart: {self.body_part}
+            Category Id: {self.category_id}>
+        """
+    
+@validates("category_id")
+def validate_category_id(self, _, category_id):
+    if not isinstance(category_id, int):
+        raise TypeError("Category ids must be integers")
+    elif category_id < 1:
+        raise ValueError(
+            f"{category_id} has to be a positive integer"
+        )
+    elif not db.session.get(Category, category_id):
+        raise ValueError(f"{category_id} must belong to an existing Category")
+    return category_id

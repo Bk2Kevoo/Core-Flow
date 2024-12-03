@@ -9,6 +9,8 @@ class Category(db.Model, SerializerMixin):
     # Relationship
     exercises = db.relationship('Exercise', back_populates='category')
 
+    serialize_rules=("-exercises",)
+
 
     def __repr__(self):
         return f'<Category {self.id}: {self.name}>'
