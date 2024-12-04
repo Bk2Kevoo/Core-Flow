@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet} from 'react-router-dom'
 // import { createGlobalStyle } from 'styled-components'
 import { useEffect, useState } from 'react'
 // import Header from './components/navigation/Header'
@@ -9,10 +9,10 @@ function App() {
     const [categories, setCategories] = useState([])
     const [exercises, setExercises] = useState([])
 
-    const [user, setUser] = useState(null)
-    const [editUser, setEditUser] = useState(false)
+    // const [user, setUser] = useState(null)
+    // const [editUser, setEditUser] = useState(false)
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
  // Getting all the WORKOUTS
     useEffect(() => {
@@ -62,7 +62,7 @@ function App() {
             <>
             {/* <GlobalStyle /> */}
             <Toaster />
-            <Outlet context={{}} />
+            <Outlet context={{workouts, categories, exercises, }} />
             </>
         )
 }

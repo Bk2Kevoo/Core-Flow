@@ -7,9 +7,9 @@ function ExerciseContainer() {
     return(
         <div>
             <h2>CoreFlow</h2>
-            <CardContaier>
+            <CardContanier>
                 {exercises && exercises.map(exercise => <ExerciseCard key={exercise.id} exercise={exercise}/>)}
-            </CardContaier>
+            </CardContanier>
         </div>
     )
 }
