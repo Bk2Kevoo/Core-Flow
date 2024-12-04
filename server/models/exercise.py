@@ -7,7 +7,6 @@ class Exercise(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     body_part = db.Column(db.String)
-    image = db.Column(db.String)
     # workout_id = db.Column(db.Integer, db.ForeignKey("workouts.id"))
     category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
 
@@ -27,6 +26,14 @@ class Exercise(db.Model, SerializerMixin):
             Category Id: {self.category_id}>
         """
     
+    # def to_dict(self):
+    #     return {
+    #         "id": self.id,
+    #         "name": self.name,
+    #         "body_part": self.body_part
+    #     }
+
+    
 @validates("category_id")
 def validate_category_id(self, _, category_id):
     if not isinstance(category_id, int):
@@ -38,13 +45,3 @@ def validate_category_id(self, _, category_id):
     elif not db.session.get(Category, category_id):
         raise ValueError(f"{category_id} must belong to an existing Category")
     return category_id
-
-@validates("image")
-def validate_image(self, _, image):
-    if not isinstance(image, str):
-        raise TypeError("Images must be strings")
-    elif not re.match(r"^https?:\/\/.*\.(?:png|jpeg|jpg)$", image):
-        raise ValueError(
-            f"{image} has to be a string of a valid url ending in png, jpeg or jpg"
-            )
-    return image

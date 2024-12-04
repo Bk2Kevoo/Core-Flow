@@ -1,4 +1,4 @@
-from routes.__init__ import Resource, g, db
+from routes.__init__ import Resource, make_response
 from models.exercise import Exercise
 
 class ExerciseById(Resource):
@@ -6,6 +6,6 @@ class ExerciseById(Resource):
         try:
             exercise = Exercise.query.filter_by(id=id).first()
             if exercise:
-                return exercise.to_dict(), 200
+                return make_response({"error":exercise.to_dict()}, 200)
         except Exception as e:
-            return str(e), 400
+            return make_response({"error": str(e)}, 400)

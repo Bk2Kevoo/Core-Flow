@@ -22,13 +22,13 @@ def not_found(error):
     return{"error": error.description}, 404
 
 
-@app.route("/")
-def homepage():
-    exercises = Exercise.query.order_by("body_part")
-    category = Category.query.order_by("name")
-    return render_template(
-        "homepage.html", cat=category, exer=exercises
-    )
+# @app.route("/")
+# def homepage():
+#     exercises = Exercise.query.order_by("body_part")
+#     category = Category.query.order_by("name")
+#     return render_template(
+#         "homepage.html", cat=category, exer=exercises
+#     )
 
        
 api.add_resource(Workouts, "/workouts")
