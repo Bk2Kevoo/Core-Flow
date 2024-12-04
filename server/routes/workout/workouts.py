@@ -8,4 +8,4 @@ class Workouts(Resource):
             serialized_workouts = [workout.as_dict() for workout in WorkOut.query]
             return make_response(serialized_workouts, 200)
         except Exception as e:
-            return {"error": str(e)}, 500
+            return make_response({"error": str(e)}, 500)

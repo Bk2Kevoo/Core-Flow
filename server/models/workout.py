@@ -1,6 +1,6 @@
 from models.__init__ import SerializerMixin,db, validates
 from models.user import User
-from models.work_exercise import WorkExercise 
+# from models.work_exercise import WorkExercise 
 
 class WorkOut(db.Model, SerializerMixin):
     __tablename__ = "workouts"

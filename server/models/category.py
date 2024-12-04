@@ -1,4 +1,4 @@
-from models.__init__ import SerializerMixin, validates, re, db
+from models.__init__ import SerializerMixin, validates, db
 
 class Category(db.Model, SerializerMixin):
     __tablename__ = "categories"

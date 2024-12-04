@@ -12,9 +12,6 @@ class User(db.Model, SerializerMixin):
 
 
     work_outs = db.relationship("WorkOut", back_populates="user",)
-    # work_exercises = db.relationship("WorkExercise", back_populates="user", cascade="all, delete-orphan")
-    # categories = db.relationship("Category", back_populates="user", cascade="all, delete-orphan")
-
     serialize_rules = ("-_password_hash",)
 
     def __repr__(self):
