@@ -1,5 +1,8 @@
 from werkzeug.exceptions import NotFound
+from flask import render_template
 from config import app, api
+from models.exercise import Exercise
+from models.category import Category
 from routes.workout.workouts import Workouts
 from routes.exercise.exercise import Exercises
 from routes.category.category import Categories
@@ -19,22 +22,30 @@ def not_found(error):
     return{"error": error.description}, 404
 
 
-# app.route("/")
-# def home():
-#     return "Home Page"
+@app.route("/")
+def homepage():
+    exercises = Exercise.query.order_by("body_part")
+    category = Category.query.order_by("name")
+    return render_template(
+        "homepage.html", cat=category, exer=exercises
+    )
 
        
 api.add_resource(Workouts, "/workouts")
+
 api.add_resource(Exercises, "/exercises")
+api.add_resource(ExerciseById, "/exercises/<int:id>")
+
 api.add_resource(Categories, "/categories")
 api.add_resource(CategoryByID, "/categories/<int:id>")
-api.add_resource(ExerciseById, "/exercises/<int:id>")
+
+api.add_resource(WorkOutExercise, '/workout-exercises', '/workout-exercises/<int:workout_id>/exercises')
+
 api.add_resource(Login, "/login")
 api.add_resource(Logout, "/logout")
 api.add_resource(CurrentUser, "/current-user")
 api.add_resource(Signup, "/signup")
 api.add_resource(EditUser, "/edit")
-api.add_resource(WorkOutExercise, '/workout-exercises', '/workout-exercises/<int:workout_id>/exercises')
 api.add_resource(Delete, "/delete-account")
 
 

@@ -12,16 +12,12 @@ class UserInitializer:
         """Initialize a new user with default workouts and exercises."""
         # Fetch the user from the database
         user = db.session.query(User).filter_by(id=self.user_id).first()
-
         if not user:
             raise ValueError("User not found")
-
         # Add default workouts for the new user
         self._add_default_workouts(user)
-
         # Add exercises to the workouts
         self._add_exercises_to_workouts()
-
         return {"message": "User initialized with default workouts and exercises."}
 
     def _add_default_workouts(self, user):
@@ -36,12 +32,9 @@ class UserInitializer:
     def _add_exercises_to_workouts(self):
         """Assign exercises to the created workouts."""
         exercises = db.session.query(Exercise).all()
-
         workouts = db.session.query(WorkOut).filter_by(user_id=self.user_id).all()
-
         if not workouts:
             raise ValueError("No workouts found for user")
-
         for workout in workouts:
             for exercise in exercises:
                 work_exercise = WorkExercise(
@@ -54,3 +47,4 @@ class UserInitializer:
                 db.session.add(work_exercise)
 
         db.session.commit()
+

@@ -1,0 +1,56 @@
+<h1>Welcome to CoreFlow</h1>
+
+<h3>This is the list of our API endpoints</h3>
+
+-
+<a
+    href="http://127.0.0.1:5000/api/v1/workouts"
+    rel="noreferrer"
+    target="_blank"
+    >All Workouts</a>
+>
+<br />
+
+-
+<a
+    href="http://127.0.0.1:5000/api/v1/exercises"
+    rel="noreferrer"
+    target="_blank"
+    >All Exercises</a>
+>
+
+<br />
+
+-
+<a
+    href="http://127.0.0.1:5000/api/v1/categories"
+    rel="noreferrer"
+    target="_blank"
+    >All Categories</a>
+>
+
+<h5>Exercises By ID</h5>
+{% for exer in exercises %} -
+
+<a 
+    href="http://127.0.0.1:5000/ap1/v1/exercises/{{exer.id}}"
+    rel="noreferrer"
+    target="_blank"
+    >{{exer.body_type}}</a>
+>
+
+<br />
+{% endfor %}
+
+<h5>Category By ID</h5>
+{% for cat in category %} -
+
+<a 
+    href="http://127.0.0.1:5000/ap1/v1/categories/{{cat.id}}"
+    rel="noreferrer"
+    target="_blank"
+    >{{cat.name}}</a>
+>
+
+<br />
+{% endfor %}
