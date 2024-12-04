@@ -1,55 +1,84 @@
-import  {useParams, useNavigate } from 'react-router-dom'
-import {useEffect, useState} from 'react'
-import styled from 'styled-components'
-// import { useOutletContext } from 'react-router-dom'
-import toast, { Toaster } from 'react-hot-toast'
-
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import toast from 'react-hot-toast';
 
 function ExerciseDetail() {
-    // const { handleEdit, deleteUser } = useOutletContext
-    const { exercise, setExercise } = useState({category:[]})
+  const [exercise, setExercise] = useState({ work_exercise: [] });
 
-    const { exerciseId } = useParams()
-    // const { userId } = useParams()
-    const navigate = useNavigate()
+  const { exerciseId } = useParams();
 
-    
-    useEffect(()=>{
-        (async () => {
-          const resp = await fetch(`/api/v1/exercises/${exerciseId}`)
-          const data = await resp.json()
-          if (resp.ok) {
-            setExercise(data)
-          } else {
-            toast.error(data.error)
-          }
-        })()
-      }, [exerciseId])
+  useEffect(() => {
+    (async () => {
+      const resp = await fetch(`/api/v1/exercises/${exerciseId}`);
+      const data = await resp.json();
 
-    const {id, name, body_part, image, category} = exercise
+      if (resp.ok) {
+        setExercise(data);
+      } else {
+        toast.error(data.error);
+      }
+    })();
+  }, [exerciseId]);
 
-    return(
-      <CardDetail id={id}>
-        <h1>{name}</h1>
-          <div className='wrapper'>
-            <div>
-              <h3>Body Part:</h3>
-              <p>{body_part}</p>
-              <h2>Category</h2>
-              <ul>
-                {category.map(cat => <li key={cat.id}>{`${cat.name}`}</li>)}
-              </ul>
-            </div>
-            <img src={image} alt ={name}/>
-          </div>
+  const { id, name, body_part, work_exercise = [] } = exercise;
 
-      </CardDetail>
-    )
+  return (
+    <CardDetail id={id}>
+      <h1>{name}</h1>
+      <div className="wrapper">
+        <div>
+          <h3>Body Part:</h3>
+          <p>{body_part}</p>
+          <h2>Associated Workouts</h2>
+          {work_exercise.map(work => (
+            <li key={work.id}>
+              {work.name} - {work.sets} sets of {work.reps} reps
+            </li>
+          ))
+        }
+        </div>
+      </div>
+    </CardDetail>
+  );
 }
 
-export default ExerciseDetail
+export default ExerciseDetail;
 
-const CardDetail = styled `
-    display:flex;
+const CardDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
 
-`
+  h1 {
+    font-size: 24px;
+    color: #333;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h3 {
+    margin: 10px 0 5px;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  li {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+`;

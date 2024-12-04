@@ -12,6 +12,11 @@ export const router = createBrowserRouter([
         element: <App />,
         errorElement: <Error />,
         children: [
+            // {
+            //     path: "/exercises",
+            //     index: true,
+            //     element: <ExerciseDetail />
+            // },
             {
                 path: "/exercises/:exerciseId",
                 index: true,

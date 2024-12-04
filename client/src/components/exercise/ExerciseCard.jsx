@@ -2,7 +2,7 @@ import styled from "styled-components"
 // import {Link} from "react-router-dom"4
 
 function ExerciseCard() {
-    const {name, body_part, image, id} = exercise
+    const {name, body_part, id} = exercise
     
     return (
         <Card id={id}>
@@ -11,7 +11,6 @@ function ExerciseCard() {
                     <h2>{name}</h2>
                     <p>{body_part}</p>
                 </div>
-                <img src={image} alt={name}/>
             </Link>
         </Card>
     )
