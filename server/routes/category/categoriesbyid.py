@@ -1,4 +1,4 @@
-from routes.__init__ import Resource, request, db, g
+from routes.__init__ import Resource, make_response
 from models.category import Category
 
 class CategoryByID(Resource):
@@ -6,6 +6,6 @@ class CategoryByID(Resource):
         try:
             category = Category.query.filter_by(id=id).first()
             if category:
-                return category.to_dict(), 200
+                return make_response({"error":category.to_dict()}, 200)
         except Exception as e:
-            return str(e), 400
+            return make_response({"error": str(e)}, 400)

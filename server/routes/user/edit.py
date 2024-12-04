@@ -1,5 +1,6 @@
 from models.user import User
-from models.__init__ import db, Resource, request, session, make_response
+from models.__init__ import db, Resource, request
+from routes.__init__ import session, make_response
 
 class EditUser(Resource):
     def patch(self):

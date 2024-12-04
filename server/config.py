@@ -2,11 +2,14 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
 from flask_migrate import Migrate
-from flask_restful import Api, Resource
+from flask_restful import Api
 from flask_bcrypt import Bcrypt
 from os import environ
 
+# Create an instance of the Flask application instance
 app = Flask(__name__)
+
+
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///coreflow.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
