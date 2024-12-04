@@ -11,21 +11,17 @@ class Signup(Resource):
             email = data.get("email")
             name = data.get("name")
             password = data.get("password")
-
             if not email or not name or not password:
                 return make_response({"error": "Email, name, and password are required."}, 400)
-
             # Create the new user
             user = User(email=email, name=name)
             user.password = password  # You may want to hash the password before saving
-
             # Add the user to the database
             db.session.add(user)
             db.session.commit()
             # Initialize user with default workouts and exercises
             user_initializer = UserInitializer(user.id)
             initialization_result = user_initializer.initialize()
-            # Store the user_id in the session
             session["user_id"] = user.id
             # Return the user data along with initialization result
             return make_response({

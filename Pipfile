@@ -17,4 +17,4 @@ flask-session = "*"
 flask-bcrypt = "*"
 
 [requires]
-python_full_version = "3.12.3"
+python_full_version = "3.8.13"
