@@ -1,14 +1,11 @@
-# from routes.__init__ import Resource, make_response
+from routes.__init__ import Resource, make_response
+from models.workout import WorkOut
 
-# class WorkoutByID(Resource):
-#     def get(self, id):
-#         try:
-#             workouts = Workouts.query.all()
-#             return make_response(workouts, 200)
-#         except Exception as e:
-#             return make_response({"error": str(e)}), 400
-
-
-
-
-# put the get allllll WORKOUTSSS and by ID
+class WorkoutById(Resource):
+    def get(self, id):
+        try:
+            workout = WorkOut.query.filter_by(id=id).first()
+            if workout:
+                return workout.to_dict(), 200
+        except Exception as e:
+            return make_response({"error": str(e)}, 400)

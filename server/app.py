@@ -6,14 +6,20 @@ from models.category import Category
 from routes.workout.workouts import Workouts
 from routes.exercise.exercise import Exercises
 from routes.category.category import Categories
+
 from routes.category.categoriesbyid import CategoryByID
 from routes.exercise.exercisebyid import ExerciseById
+from routes.workout.workoutbyid import WorkoutById
+from routes.workoutexercise.workoutexercisebyid import WorkExerciseById
+from routes.workoutexercise.workoutexercise import WorkOutExercise
+
+
+
 from routes.auth.login import Login
 from routes.auth.logout import Logout
 from routes.auth.signup import Signup
 from routes.auth.currentuser import CurrentUser
 from routes.user.edit import EditUser
-from routes.workoutexercise.workoutexercise import WorkOutExercise
 from routes.user.delete import Delete
 
 # General Route Concerns
@@ -32,6 +38,7 @@ def not_found(error):
 
        
 api.add_resource(Workouts, "/workouts")
+api.add_resource(WorkoutById, "/workouts/<int:id>")
 
 api.add_resource(Exercises, "/exercises")
 api.add_resource(ExerciseById, "/exercises/<int:id>")
@@ -39,7 +46,8 @@ api.add_resource(ExerciseById, "/exercises/<int:id>")
 api.add_resource(Categories, "/categories")
 api.add_resource(CategoryByID, "/categories/<int:id>")
 
-api.add_resource(WorkOutExercise, '/workout-exercises', '/workout-exercises/<int:workout_id>/exercises')
+api.add_resource(WorkOutExercise, '/workout-exercises')
+api.add_resource(WorkExerciseById, '/workout-exercises/<int:id>')
 
 api.add_resource(Login, "/login")
 api.add_resource(Logout, "/logout")
