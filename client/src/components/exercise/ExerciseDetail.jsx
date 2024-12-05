@@ -1,11 +1,13 @@
-import { useParams } from 'react-router-dom';
+import { useOutletContext, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import toast from 'react-hot-toast';
+import WorkExercise from '../workexercise/WorkExercise';
+
 
 function ExerciseDetail() {
-  const [exercise, setExercise] = useState({ work_exercise: [] });
-
+  const [exercise, setExercise] = useState({ work_exercises: [] });
+  const { currentUser } = useOutletContext()
   const { exerciseId } = useParams();
 
   useEffect(() => {
@@ -21,7 +23,7 @@ function ExerciseDetail() {
     })();
   }, [exerciseId]);
 
-  const { id, name, body_part, work_exercise = [] } = exercise;
+  const { id, name, body_part,} = exercise
 
   return (
     <CardDetail id={id}>
@@ -30,13 +32,9 @@ function ExerciseDetail() {
         <div>
           <h3>Body Part:</h3>
           <p>{body_part}</p>
-          <h2>Associated Workouts</h2>
-          {work_exercise.map(work => (
-            <li key={work.id}>
-              {work.name} - {work.sets} sets of {work.reps} reps
-            </li>
-          ))
-        }
+          <h2>Should Do:</h2>
+          <hr/>
+          {currentUser && exercise.work_exercises.map(we => <WorkExercise key={we.id} workExercise={we}/>)}   
         </div>
       </div>
     </CardDetail>
@@ -57,28 +55,5 @@ const CardDetail = styled.div`
   h1 {
     font-size: 24px;
     color: #333;
-  }
-
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-
-  h3 {
-    margin: 10px 0 5px;
-  }
-
-  p {
-    margin: 5px 0;
-  }
-
-  ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
-
-  li {
-    margin: 5px 0;
-    font-size: 16px;
-  }
-`;
+}
+    `

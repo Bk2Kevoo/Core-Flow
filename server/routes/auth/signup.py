@@ -26,7 +26,7 @@ class Signup(Resource):
             # Return the user data along with initialization result
             return make_response({
                 "message": f"Welcome {user.name}, you now have some Workouts have fun!",
-                "user": user.to_dict(), 
+                **user.to_dict(), 
                 "initialization_message": initialization_result["message"]
             }, 201)  # Created
         except IntegrityError as e:
