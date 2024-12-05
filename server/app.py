@@ -1,8 +1,6 @@
 from werkzeug.exceptions import NotFound
 from flask import render_template
 from config import app, api
-from models.exercise import Exercise
-from models.category import Category
 from routes.workout.workouts import Workouts
 from routes.exercise.exercise import Exercises
 from routes.category.category import Categories
@@ -27,14 +25,6 @@ from routes.user.delete import Delete
 def not_found(error):
     return{"error": error.description}, 404
 
-
-# @app.route("/")
-# def homepage():
-#     exercises = Exercise.query.order_by("body_part")
-#     category = Category.query.order_by("name")
-#     return render_template(
-#         "homepage.html", cat=category, exer=exercises
-#     )
 
        
 api.add_resource(Workouts, "/workouts")

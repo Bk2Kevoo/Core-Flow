@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 from faker import Faker
 from config import app
 from models.__init__ import db
@@ -29,6 +28,53 @@ exercises_data = {
     "Calisthenics": ["Push Ups", "Pull Ups", "Dips", "Muscle-Ups", "Handstands"]
 }
 
+# Map exercises to their image URLs (you can use the appropriate file paths or URLs)
+# exercise_images = {
+#     "Dumbbell Skull Crusher": "/images/dumbbell_skull_crusher.jpg",
+#     "Bicep Curls": "/images/bicep_curls.jpg",
+#     "Tricep Dips": "/images/tricep_dips.jpg",
+#     "Hammer Curls": "/images/hammer_curls.jpg",
+#     "Barbell Squats": "/images/barbell_squats.jpg",
+#     "Lunges": "/images/lunges.jpg",
+#     "Leg Press": "/images/leg_press.jpg",
+#     "Calf Raises": "/images/calf_raises.jpg",
+#     "Romanian Deadlift": "/images/romanian_deadlift.jpg",
+#     "Front Squats": "/images/front_squats.jpg",
+#     "Leg Extensions": "/images/leg_extensions.jpg",
+#     "Bulgarian Split Squats": "/images/bulgarian_split_squats.jpg",
+#     "Step Ups": "/images/step_ups.jpg",
+#     "Deadlifts": "/images/deadlifts.jpg",
+#     "Pull Ups": "/images/pull_ups.jpg",
+#     "Lat Pulldowns": "/images/lat_pulldowns.jpg",
+#     "Barbell Rows": "/images/barbell_rows.jpg",
+#     "T-Bar Row": "/images/t_bar_row.jpg",
+#     "Bench Press": "/images/bench_press.jpg",
+#     "Push Ups": "/images/push_ups.jpg",
+#     "Chest Flys": "/images/chest_flys.jpg",
+#     "Incline Dumbbell Press": "/images/incline_dumbbell_press.jpg",
+#     "Overhead Press": "/images/overhead_press.jpg",
+#     "Lateral Raises": "/images/lateral_raises.jpg",
+#     "Front Raises": "/images/front_raises.jpg",
+#     "Arnold Press": "/images/arnold_press.jpg",
+#     "Plank": "/images/plank.jpg",
+#     "Russian Twists": "/images/russian_twists.jpg",
+#     "Leg Raises": "/images/leg_raises.jpg",
+#     "Mountain Climbers": "/images/mountain_climbers.jpg",
+#     "Treadmill Running": "/images/treadmill_running.jpg",
+#     "Jump Rope": "/images/jump_rope.jpg",
+#     "Cycling": "/images/cycling.jpg",
+#     "Rowing Machine": "/images/rowing_machine.jpg",
+#     "HIIT": "/images/hiit.jpg",
+#     "Kettlebell Swings": "/images/kettlebell_swings.jpg",
+#     "Clean and Press": "/images/clean_and_press.jpg",
+#     "Burpees": "/images/burpees.jpg",
+#     "Thrusters": "/images/thrusters.jpg",
+#     "Pull Ups": "/images/pull_ups.jpg",
+#     "Dips": "/images/tricep_dips.jpg",
+#     "Muscle-Ups": "/images/muscle_ups.jpg",
+#     "Handstands": "/images/handstands.jpg"
+# }
+
 with app.app_context():
     # Clear existing data
     WorkExercise.query.delete()
@@ -46,12 +92,14 @@ with app.app_context():
     db.session.add_all(cats)
     db.session.commit()
 
-    # Create exercises linked to categories
+    # Create exercises linked to categories, with unique image URLs
     exercises = []
     for category_name, exercise_list in exercises_data.items():
         category = Category.query.filter_by(name=category_name).first()
         for exercise_name in exercise_list:
-            exercise = Exercise(name=exercise_name, body_part=category_name, category_id=category.id)
+            # Fetch the image URL from the exercise_images mapping
+            # image_url = exercise_images.get(exercise_name, "/images/default_exercise.jpg")  # Default if not found
+            exercise = Exercise(name=exercise_name, body_part=category_name, category_id=category.id,)
             exercises.append(exercise)
 
     db.session.add_all(exercises)
@@ -69,9 +117,6 @@ with app.app_context():
     db.session.commit()
 
     # Workouts (linked to users)
-
-    # We create a list with the variable name workout_names
-    # Inside the list we have names it can randomly choose depending on the specific workout they are doing for the USER
     workout_names = [
         "Strength Training", "Bodyweight Circuit", "HIIT", "Endurance Training",
         "Core Workout", "Full Body Routine", "CrossFit", "Cardio Blast",
@@ -115,6 +160,5 @@ with app.app_context():
 
     db.session.add_all(work_exs)
     db.session.commit()
-
 
     print("Seeding done!")

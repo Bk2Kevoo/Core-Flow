@@ -18,14 +18,14 @@ export default Home;
 const HomeContainer = styled.div`
   height: 100vh;
   width: 100%;
-  background: url('/path-to-your-image-or-gif.gif') no-repeat center center/cover;
+  // background: url('/path-to-your-image-or-gif.gif') no-repeat center center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const Overlay = styled.div`
-  background-color: rgba(0, 0, 0, 0.6); /* Transparent overlay */
+  background-color: rgba(0, 0, 0, 0.5); /* Slightly lighter overlay */
   height: 100%;
   width: 100%;
   display: flex;
@@ -38,13 +38,13 @@ const WelcomeMessage = styled.div`
   color: #fff;
 
   h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 2rem; /* Reduced font size */
+    margin-bottom: 0.5rem; /* Smaller spacing between header and paragraph */
   }
 
   p {
-    font-size: 1.5rem;
-    max-width: 600px;
+    font-size: 1rem; /* Reduced paragraph font size */
+    max-width: 400px; /* Narrower text area */
     margin: 0 auto;
   }
 `;

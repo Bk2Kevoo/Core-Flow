@@ -28,10 +28,11 @@ function Header({currentUser, updateUser}) {
               </div>:
               <ul>
                  <li onClick={() => setMenu(!menu)}>x</li>
-                 <li><Link to='/home'> Home</Link></li>
+                 <li><Link to='/'> Home</Link></li>
                  <li ><Link to='/categories'>Categories</Link></li>
                  { currentUser ? (
                    <>
+                     <li ><Link to='/profile'>Profile</Link></li>
                      <li ><button onClick={handleLogout}>Logout</button></li>
                    </>
                  ) : (

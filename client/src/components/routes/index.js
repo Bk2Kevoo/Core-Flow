@@ -6,6 +6,7 @@ import ExerciseDetail from "../exercise/ExerciseDetail"
 import Registration from '../auth/Register'
 import CategoryDetails from "../category/CategoryDetails"
 import CategoriesList from '../category/CategoriesList'
+import Profile from '../users/profile'
 
 
 
@@ -16,7 +17,7 @@ export const router = createBrowserRouter([
         errorElement: <Error />,
         children: [
             {
-                path: "/home",
+                path: "/",
                 element: <Home />
             },
             {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Registration />
+            },
+            {
+                path: "/profile",
+                element: <Profile />
             },
         ]
     }
