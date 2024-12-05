@@ -57,15 +57,15 @@ const CategoriesContainer = styled.div`
 
 const CategoriesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Increased min-width for larger cards */
+  gap: 40px; /* Increased gap for more space between cards */
 `;
 
 const CategoryCard = styled.div`
   background-color: #fff;
   border: 1px solid #f1f1f1;
   border-radius: 12px;
-  padding: 25px;
+  padding: 35px; /* Increased padding inside the card */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   cursor: pointer;
@@ -88,7 +88,7 @@ const CategoryCard = styled.div`
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 32px; /* Increased font size */
     font-weight: 500;
     color: #333;
     margin: 0;

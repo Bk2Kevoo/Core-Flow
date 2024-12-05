@@ -1,47 +1,43 @@
 import { useEffect, useState } from "react";
 import toast from 'react-hot-toast';
 import { useOutletContext, useParams } from "react-router-dom";
-import styled from 'styled-components'
-import Exercise from "../exercise/ExerciseCard"
+import styled from 'styled-components';
+import Exercise from "../exercise/ExerciseCard";
 
 function Category() {
-  const [category, setCategory] = useState({ exercises: [] });  // Ensure `exercises` is always an array
-  const { currentUser } = useOutletContext()
+  const [category, setCategory] = useState({ exercises: [] });
+  const { currentUser } = useOutletContext();
   const { categoryId } = useParams();
 
   useEffect(() => {
     (async () => {
         const resp = await fetch(`/api/v1/categories/${categoryId}`);
-        const data = await resp.json()
+        const data = await resp.json();
         if (resp.ok) {
-          setCategory(data)
+          setCategory(data);
         } else {
-            toast.error(data.error)
+            toast.error(data.error);
         }
     })();
   }, [categoryId]);
 
-  const { id, name, exercises } = category;  // Ensure exercises is destructured
+  const { id, name, exercises } = category;
 
-  return(
+  return (
     <CardDetail id={id}>
       <h1>{name}</h1>
-        <div className='wrapper'>
-          <div>
-            <h3>Of Type:</h3>
-            <p>{name}</p>
-            <h2>Exercises</h2>
-            <ul>
-            {currentUser && Array.isArray(exercises) && exercises.length > 0 ? (
-                exercises.map(exer => <Exercise key={exer.id} exercise={exer} />)
-            ) : (
-                <p>Must Login to View the specific cateegory 😊</p>
-            )}
-            </ul>
-          </div>
-        </div>
+      <div className="wrapper">
+        <h2>Exercises</h2>
+        <ul>
+          {currentUser && Array.isArray(exercises) && exercises.length > 0 ? (
+            exercises.map(exer => <Exercise key={exer.id} exercise={exer} />)
+          ) : (
+            <p>Must login to view the exercises 😊</p>
+          )}
+        </ul>
+      </div>
     </CardDetail>
-  )
+  );
 }
 
 export default Category;
@@ -49,22 +45,23 @@ export default Category;
 const CardDetail = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 30px;
   border-radius: 15px;
-  max-width: 800px;
-  margin: 20px auto;
-  background-color: #f7f7f7; /* Soft background color */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
-  transition: transform 0.3s ease-in-out; /* Hover effect for card */
+  max-width: 900px;
+  margin: 30px auto;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-in-out;
   &:hover {
-    transform: scale(1.03); /* Slightly enlarge on hover */
+    transform: scale(1.02);
   }
 
   h1 {
-    font-size: 28px;
+    font-size: 2.5rem;
     color: #2c3e50;
-    font-weight: 600;
+    font-weight: 700;
     text-align: center;
+    margin-bottom: 15px;
   }
 
   .wrapper {
@@ -75,17 +72,18 @@ const CardDetail = styled.div`
   }
 
   h2 {
-    font-size: 22px;
-    margin-top: 10px;
+    font-size: 1.8rem;
+    margin-top: 20px;
     color: #34495e;
-    font-weight: 500;
+    font-weight: 600;
+    margin-bottom: 20px;
   }
 
   ul {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 20px; /* Increased gap for more space between items */
+    margin-top: 20px;
     padding: 0;
     list-style-type: none;
   }
@@ -96,20 +94,21 @@ const CardDetail = styled.div`
     align-items: center;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    transition: transform 0.3s ease-in-out; /* Hover effect for exercises */
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
   }
 
   li:hover {
-    transform: translateY(-5px); /* Lift up on hover */
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
   }
 
   p {
     color: #e74c3c;
-    font-size: 18px;
+    font-size: 1.2rem;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 30px;
   }
 `;
