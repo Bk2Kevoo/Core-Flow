@@ -4,10 +4,9 @@ import styled from 'styled-components';
 import toast from 'react-hot-toast';
 import WorkExercise from '../workexercise/WorkExercise';
 
-
 function ExerciseDetail() {
   const [exercise, setExercise] = useState({ work_exercises: [] });
-  const { currentUser } = useOutletContext()
+  const { currentUser } = useOutletContext();
   const { exerciseId } = useParams();
 
   useEffect(() => {
@@ -23,7 +22,17 @@ function ExerciseDetail() {
     })();
   }, [exerciseId]);
 
-  const { id, name, body_part,} = exercise
+  const { id, name, body_part, work_exercises } = exercise;
+
+  console.log("Work Exercises: ", work_exercises);
+
+  const uniqueWorkExercises = work_exercises.filter((value, index, self) => {
+    return index === self.findIndex((e) => (
+      e.sets === value.sets && e.reps === value.reps && e.weight === value.weight
+    ));
+  });
+
+  console.log("Unique Work Exercises: ", uniqueWorkExercises);
 
   return (
     <CardDetail id={id}>
@@ -33,8 +42,10 @@ function ExerciseDetail() {
           <h3>Body Part:</h3>
           <p>{body_part}</p>
           <h2>Should Do:</h2>
-          <hr/>
-          {currentUser && exercise.work_exercises.map(we => <WorkExercise key={we.id} workExercise={we}/>)}   
+          <hr />
+          {currentUser && uniqueWorkExercises.map(we => (
+            <WorkExercise key={we.id} workExercise={we} />
+          ))}
         </div>
       </div>
     </CardDetail>
@@ -55,5 +66,29 @@ const CardDetail = styled.div`
   h1 {
     font-size: 24px;
     color: #333;
-}
-    `
+  }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  h2 {
+    font-size: 22px;
+    margin-top: 10px;
+    color: #333;
+  }
+
+  h3 {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #555;
+  }
+
+  p {
+    font-size: 16px;
+    color: #777;
+    margin-top: 5px;
+  }
+`;

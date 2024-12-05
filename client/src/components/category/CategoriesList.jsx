@@ -21,8 +21,8 @@ function CategoriesList() {
 
   return (
     <CategoriesContainer>
-      <h1>Categories</h1>
-      <ul>
+      <h1>Explore Our Categories</h1>
+      <CategoriesGrid>
         {categories.map((category) => (
           <CategoryCard key={category.id}>
             <Link to={`/categories/${category.id}`}>
@@ -30,7 +30,7 @@ function CategoriesList() {
             </Link>
           </CategoryCard>
         ))}
-      </ul>
+      </CategoriesGrid>
     </CategoriesContainer>
   );
 }
@@ -38,43 +38,64 @@ function CategoriesList() {
 export default CategoriesList;
 
 const CategoriesContainer = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
 
   h1 {
-    text-align: center;
+    font-size: 36px;
     color: #333;
-    font-size: 28px;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
+    font-weight: 600;
+    margin-bottom: 40px;
+    font-family: 'Roboto', sans-serif;
   }
 `;
 
-const CategoryCard = styled.li`
-  margin: 10px 0;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  transition: background-color 0.3s, transform 0.3s;
+const CategoriesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+`;
 
+const CategoryCard = styled.div`
+  background-color: #fff;
+  border: 1px solid #f1f1f1;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  
   &:hover {
-    background-color: #f5f5f5;
-    transform: translateY(-3px);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    background-color: #fafafa;
   }
 
   a {
     text-decoration: none;
-    color: #007bff;
+    color: #333;
+    display: block;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #007bff;
+    }
   }
 
   h2 {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
     margin: 0;
-    font-size: 20px;
+    transition: color 0.3s ease;
+  }
+
+  &:hover h2 {
+    color: #007bff;
   }
 `;
