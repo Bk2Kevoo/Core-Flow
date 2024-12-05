@@ -55,4 +55,3 @@ const BodyPart = styled.p`
     margin: 4px 0;
     font-weight: 500; /* Slightly bold to emphasize the body part */
 `;
-
