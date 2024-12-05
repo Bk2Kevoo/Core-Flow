@@ -6,8 +6,6 @@ import toast, { Toaster } from "react-hot-toast"
 
 function App() {
     const [workouts, setWorkOuts] = useState([])
-    const [categories, setCategories] = useState([])
-    const [exercises, setExercises] = useState([])
     const [currentUser, setCurrentUser] = useState(null)
 
     // const [user, setUser] = useState(null)
@@ -40,33 +38,6 @@ function App() {
         })()
     }, [])
 
-    // Getting all the CATEGORIES
-    // useEffect(() => {
-    //     (async () => {
-    //     const resp = await fetch("/api/v1/categories")
-    //     const data = await resp.json()
-    //     if (resp.ok) {
-    //         setCategories(data)
-    //     } else {
-    //         toast.error(data.error)
-    //     }
-    //     })()
-    // }, [])
-    
-    // // Getting all the EXERCISES
-    // useEffect(() => {
-    //     (async () => {
-    //     const resp = await fetch("/api/v1/exercises")
-    //     const data = await resp.json()
-    //     if (resp.ok) {
-    //         setExercises(data)
-    //     } else {
-    //         toast.error(data.error)
-    //     }
-    //     })()
-    // }, [])
-
-
         // Add user, edit user, delete user, update user
         const updateUser = (value) => setCurrentUser(value) 
 
@@ -77,7 +48,7 @@ function App() {
             {/* <GlobalStyle /> */}
             <Header currentUser={currentUser} updateUser={updateUser} />
             <Toaster />
-            <Outlet context={{workouts, categories, exercises, currentUser, updateUser}} />
+            <Outlet context={{workouts, currentUser, updateUser}} />
             </>
         )
 }

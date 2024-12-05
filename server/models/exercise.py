@@ -1,4 +1,4 @@
-from models.__init__ import SerializerMixin, validates, db, re
+from models.__init__ import SerializerMixin, validates, db
 from models.category import Category
 
 class Exercise(db.Model, SerializerMixin):
@@ -7,7 +7,7 @@ class Exercise(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     body_part = db.Column(db.String)
-    # workout_id = db.Column(db.Integer, db.ForeignKey("workouts.id"))
+    # image_url = db.Column(db.String, nullable=True)
     category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
 
     # add relationship
@@ -22,16 +22,16 @@ class Exercise(db.Model, SerializerMixin):
         <Exercise #{self.id}: 
             Name: {self.name}
             BodyPart: {self.body_part}
-            Image: {self.image}
             Category Id: {self.category_id}>
         """
     
-    # def to_dict(self):
-    #     return {
-    #         "id": self.id,
-    #         "name": self.name,
-    #         "body_part": self.body_part
-    #     }
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "body_part": self.body_part,
+            # "image_url": self.image_url 
+        }
 
     
 @validates("category_id")
