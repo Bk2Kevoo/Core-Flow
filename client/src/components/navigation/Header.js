@@ -28,14 +28,12 @@ function Header({currentUser, updateUser}) {
               </div>:
               <ul>
                  <li onClick={() => setMenu(!menu)}>x</li>
-                 <li><Link to='/'> Home</Link></li>
+                 <li><Link to='/home'> Home</Link></li>
+                 <li ><Link to='/categories'>Categories</Link></li>
                  { currentUser ? (
                    <>
-                     <li ><Link to='/users/new'>New User</Link></li>
-                     <li ><Link to='/exercises'>Exercises</Link></li>
                      <li ><button onClick={handleLogout}>Logout</button></li>
                    </>
-   
                  ) : (
                    <li><Link to='/register'>Register Now!</Link></li>
                  )}
@@ -64,7 +62,7 @@ function Header({currentUser, updateUser}) {
      align-items: center;
      a{
        text-decoration: none;
-       color:white;
+       color:black;
        font-family:Arial;
      }
      a:hover{

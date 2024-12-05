@@ -1,7 +1,7 @@
 import styled from "styled-components"
-// import {Link} from "react-router-dom"4
+import {Link} from "react-router-dom"
 
-function ExerciseCard() {
+function ExerciseCard({exercise}) {
     const {name, body_part, id} = exercise
     
     return (

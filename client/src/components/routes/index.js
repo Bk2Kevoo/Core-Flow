@@ -1,9 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
-// import Home from '../components/pages/Home'
+import Home from "../homepage/Home"
 import Error from '../errors/ErrorPage'
 import ExerciseDetail from "../exercise/ExerciseDetail"
-// import Register from '../components/auth/Register'
+import Registration from '../auth/Register'
+import CategoryDetails from "../category/CategoryDetails"
+import CategoriesList from '../category/CategoriesList'
+
 
 
 export const router = createBrowserRouter([
@@ -12,15 +15,25 @@ export const router = createBrowserRouter([
         element: <App />,
         errorElement: <Error />,
         children: [
-            // {
-            //     path: "/exercises",
-            //     index: true,
-            //     element: <ExerciseDetail />
-            // },
+            {
+                path: "/home",
+                element: <Home />
+            },
             {
                 path: "/exercises/:exerciseId",
-                index: true,
                 element: <ExerciseDetail />
+            },
+            {
+                path: "/categories",
+                element: <CategoriesList />
+            },
+            {
+                path: "/categories/:categoryId",
+                element: <CategoryDetails />
+            },
+            {
+                path: "/register",
+                element: <Registration />
             },
         ]
     }
