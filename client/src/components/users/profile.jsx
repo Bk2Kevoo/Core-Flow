@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import styled from "styled-components";
 
 const Profile = () => {
@@ -9,6 +9,7 @@ const Profile = () => {
   const [email, setEmail] = useState(currentUser?.email || "");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleUpdate = async () => {
     setError(""); // Reset error message
@@ -46,6 +47,26 @@ const Profile = () => {
       }
     } catch (err) {
       setError("An error occurred while updating your profile.");
+    }
+  };
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm("Are you sure you want to delete your profile?");
+    if (confirmDelete) {
+      try {
+        const response = await fetch(`/api/v1/delete-account`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          alert("Profile deleted successfully!");
+          navigate('/')
+        } else {
+          setError("Failed to delete profile.");
+        }
+      } catch (err) {
+        setError("An error occurred while deleting your profile.");
+      }
     }
   };
 
@@ -89,6 +110,7 @@ const Profile = () => {
         </FormGroup>
         <Button type="submit">Update Profile</Button>
       </Form>
+      <DeleteButton onClick={handleDelete}>Delete Profile</DeleteButton>
     </ProfileContainer>
   );
 };
@@ -155,4 +177,19 @@ const Button = styled.button`
   cursor: pointer;
   &:hover {
     background-color: #0056b3;
-  `
+  }
+`;
+
+const DeleteButton = styled.button`
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #d9534f;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  &:hover {
+    background-color: #c9302c;
+  }
+`;
