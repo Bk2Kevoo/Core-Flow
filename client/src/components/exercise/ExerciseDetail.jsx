@@ -24,8 +24,6 @@ function ExerciseDetail() {
 
   const { id, name, body_part, work_exercises } = exercise;
 
-  console.log("Work Exercises: ", work_exercises);
-
   const uniqueWorkExercises = work_exercises.filter((value, index, self) => {
     return index === self.findIndex((e) => (
       e.sets === value.sets && e.reps === value.reps && e.weight === value.weight
@@ -43,7 +41,7 @@ function ExerciseDetail() {
           <p>{body_part}</p>
           <h2>Should Do:</h2>
           <hr />
-          {currentUser && uniqueWorkExercises.map(we => (
+          {currentUser && work_exercises.map(we => (
             <WorkExercise key={we.id} workExercise={we} />
           ))}
         </div>
@@ -66,29 +64,5 @@ const CardDetail = styled.div`
   h1 {
     font-size: 24px;
     color: #333;
-  }
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  h2 {
-    font-size: 22px;
-    margin-top: 10px;
-    color: #333;
-  }
-
-  h3 {
-    font-size: 18px;
-    margin-top: 10px;
-    color: #555;
-  }
-
-  p {
-    font-size: 16px;
-    color: #777;
-    margin-top: 5px;
   }
 `;
