@@ -24,7 +24,7 @@ Core Flow is a web application designed to streamline user registration and auth
 
 ### 📋 Prerequisites
 Make sure you have the following installed:
-- **Node.js** (for the frontend)
+- **React.js** (for the frontend)
 - **Python** (for the backend)
 - **Pipenv** (for virtual environment management)
 
@@ -43,27 +43,27 @@ Make sure you have the following installed:
 ### 🐍 Backend Setup (Flask)
 
 1. **Navigate to the server folder**:
-    ```bash
+    ```
     cd CoreFlow/server
     ```
 
 2. **Install dependencies**:
-    ```bash
+    ```
     pipenv install && pipenv shell
     ```
 
 3. **Initialize the database**:
-    ```bash
+    ```
     flask db init
     ```
 
 4. **Seed the database**:
-    ```bash
+    ```
     python seed.py
     ```
 
 5. **Run the Flask server**:
-    ```bash
+    ```
     flask run
     ```
 
@@ -72,17 +72,17 @@ Make sure you have the following installed:
 ### ⚛️ Frontend Setup (React)
 
 1. Open a new terminal and navigate to the client directory:
-    ```bash
+    ```
     cd ../client
     ```
 
 2. **Install dependencies**:
-    ```bash
+    ```
     npm install
     ```
 
 3. **Run the React application**:
-    ```bash
+    ```
     npm start
     ```
 

@@ -41,8 +41,6 @@ function App() {
         // Add user, edit user, delete user, update user
         const updateUser = (value) => setCurrentUser(value) 
 
-
-
         return (
             <>
             {/* <GlobalStyle /> */}

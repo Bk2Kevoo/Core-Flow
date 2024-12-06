@@ -40,7 +40,13 @@ const Profile = () => {
 
       const data = await response.json();
       if (response.ok) {
+        // Update user context with new data
         updateUser(data);
+
+        // Reset the form fields to reflect the updated data
+        setName(data.name);
+        setEmail(data.email);
+        setPassword(""); // Reset password field
         alert("Profile updated successfully!");
       } else {
         setError(data.error || "Failed to update profile.");
@@ -59,8 +65,9 @@ const Profile = () => {
         });
 
         if (response.ok) {
+          updateUser(null)
           alert("Profile deleted successfully!");
-          navigate('/')
+          navigate('/');
         } else {
           setError("Failed to delete profile.");
         }
