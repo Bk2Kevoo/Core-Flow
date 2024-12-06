@@ -34,12 +34,12 @@ Make sure you have the following installed:
 
 1. **Navigate to the server folder**:
     ```bash
-    cd CoreFlow/server
+    pipenv install && pipenv shell
     ```
 
 2. **Install dependencies**:
     ```bash
-    pipenv install
+    cd CoreFlow/server
     ```
 
 3. **Initialize the database**:
