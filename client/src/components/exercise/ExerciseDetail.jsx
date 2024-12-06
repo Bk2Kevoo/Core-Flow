@@ -41,14 +41,14 @@ function ExerciseDetail() {
           <p>{body_part}</p>
           <h2>Should Do:</h2>
           <hr />
-          {currentUser && work_exercises.map(we => (
+          {currentUser && uniqueWorkExercises.map(we => (
             <WorkExercise key={we.id} workExercise={we} />
           ))}
         </div>
       </div>
     </CardDetail>
   );
-}
+}  
 
 export default ExerciseDetail;
 
