@@ -30,16 +30,26 @@ Make sure you have the following installed:
 
 ---
 
+### 🍴 Fork and Clone
+
+1. **Fork the repository** by clicking the "Fork" button in the top-right corner of the repository page.
+2. **Clone the repository** to your local machine:
+    ```bash
+    git clone https://github.com/your-username/CoreFlow.git
+    ```
+
+---
+
 ### 🐍 Backend Setup (Flask)
 
 1. **Navigate to the server folder**:
     ```bash
-    pipenv install && pipenv shell
+    cd CoreFlow/server
     ```
 
 2. **Install dependencies**:
     ```bash
-    cd CoreFlow/server
+    pipenv install && pipenv shell
     ```
 
 3. **Initialize the database**:
@@ -89,5 +99,3 @@ Make sure you have the following installed:
 ## 🤝 Contributing
 
 We welcome contributions to **Core Flow**! Please submit pull requests to share your improvements or report issues via the repository's issue tracker.
-
----
